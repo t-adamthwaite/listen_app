@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 import Playlist from './Playlist'
+import SearchBar from './SearchBar'
 
 function App() {
 
   return (
     <>
-      <h1>Hello World</h1>
+      <SearchBar />
       <Playlist />
     </>
   )
