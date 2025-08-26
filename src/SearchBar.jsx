@@ -1,24 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function SearchBar() {
+function SearchBar( {inputText, handleInputText, searchType, handleSearchType, searchQuery, handleSubmit}) {
 
-    const [text, setText] = useState('');
-    function handleInputText(e) {
-        setText(e.target.value);
-    }
-
-    const [searchType, setSearchType] = useState('all');
-    function handleSearchType(e) {
-        setSearchType(e.target.value)
-    }
-
-    const [searchQuery, setSearchQuery] = useState('');
-    function handleSubmit(e) {
-        e.preventDefault();
-        setSearchQuery(`?=${searchType}+${text}`);
-        setSearchType('all');
-        setText('');
-    }
 
     return (
         <>
@@ -38,11 +21,9 @@ function SearchBar() {
                     name='search' 
                     id='search' 
                     type='text' 
-                    onChange={handleInputText} value={text}/>
-                <input 
-                    type='submit' 
-                    value={'\u{1F50D}'}
-                 />
+                    onChange={handleInputText} 
+                    value={inputText}/>
+                <button type='submit'>{'\u{1F50D} Search'}</button>
             </form>
             <p>{searchQuery}</p>
         </>

@@ -2,8 +2,9 @@
 
 function Playlist() {
     return (
-        <p>This is a placeholder</p>,
-        <p>playlist here</p>
+        <>
+            <p>playlist here</p>
+        </>
     );
 }
 
