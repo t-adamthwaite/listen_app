@@ -28,7 +28,7 @@ function SearchResults({searchQuery}) {
             <p>Search Results Here</p>
             <p>{endpoint}</p>
             <div>
-                {/*Parse request below */}
+                {/*Parse request below as map for multple song returns */}
                 <p>{testData.artist}</p>
                 <p>{testData.song}</p>
             </div>
