@@ -1,36 +1,21 @@
 import {useState, useEffect} from 'react';
 
-function SearchResults({searchQuery}) {
-
-    //set let for API URL w/o endpoint
-
-    let endpoint = searchQuery;
-
-    //concatinate url with endpoint
-
-    let testData = {};
-
-    if (endpoint) {
-        //Fetch request here for API
-
-        //result of request
-        testData = {
-            artist: 'Billie Eilish',
-            song: 'Ocean Eyes'
-        };
-    } else {
-        testData = {};
-    }
+function SearchResults({songList}) {
 
 
     return (
         <>
             <p>Search Results Here</p>
-            <p>{endpoint}</p>
             <div>
-                {/*Parse request below as map for multple song returns */}
-                <p>{testData.artist}</p>
-                <p>{testData.song}</p>
+                {songList.map((song, i) => {
+                    return (
+                        <div key={i}>
+                            <img src={song.album.images[2].url} />
+                            <p>{song.name}</p>
+                            <p>{song.artists[0].name}</p>
+                        </div>
+                    );
+                })}
             </div>
         </>
     );

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function SearchBar( {inputText, handleInputText, searchType, handleSearchType, searchQuery, handleSubmit}) {
+function SearchBar( {inputText, handleInputText, searchType, handleSearchType, handleSubmit}) {
 
 
     return (
@@ -11,8 +11,7 @@ function SearchBar( {inputText, handleInputText, searchType, handleSearchType, s
                     onChange={handleSearchType} id='search-type' 
                     name='search-type'
                     value={searchType}>
-                        <option value='all'>{'all'}</option>
-                        <option value='song'>{'song'}</option>
+                        <option value='track'>{'song'}</option>
                             <option value='artist'>{'artist'}</option>
                     <option value='genre'>{'genre'}</option>
                 </select>
@@ -25,7 +24,6 @@ function SearchBar( {inputText, handleInputText, searchType, handleSearchType, s
                     value={inputText}/>
                 <button type='submit'>{'\u{1F50D} Search'}</button>
             </form>
-            <p>{searchQuery}</p>
         </>
         
     )

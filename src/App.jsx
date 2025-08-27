@@ -11,31 +11,14 @@ function App() {
       setInputText(e.target.value);
   }
 
-  const [searchType, setSearchType] = useState('all');
+  const [searchType, setSearchType] = useState('artist');
   function handleSearchType(e) {
       setSearchType(e.target.value)
   }
-
-  const [searchQuery, setSearchQuery] = useState(null);
-  function setQuery() {
-      if (isSearched && inputText) {
-          setSearchQuery(`?=${searchType}&${inputText.replaceAll(' ', '_')}`);
-          isSearched = false;
-          console.log("false");
-      } else {
-        setSearchQuery(null);
-      }
-  }
-
-  let isSearched = false;
-  function handleSubmit(e) {
-      e.preventDefault();
-      isSearched = true;
-      console.log("true");
-      setQuery();
-  }
+ 
 
   //Spotify API access token request
+  const [accessToken, setAccessToken] = useState('');
   const clientID = '9a1429f9ade9438783281ab6449e78bd';
   const clientSecret = 'eb82f51b03da4576b15ef28efbda10e8';
   useEffect(() => {
@@ -49,9 +32,38 @@ function App() {
 
       fetch('https://accounts.spotify.com/api/token', authParams)
           .then(request => request.json())
-          .then(data => console.log(data))
+          .then(data => setAccessToken(data.access_token))
   }, [])
 
+
+  //state to hold our data
+  const [songs, setSongs] = useState([]);
+  //search function to pass to components
+  async function handleSearch(e) {
+    e.preventDefault();
+  //Generic params for search using API
+    const requestParams = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + accessToken
+      }
+    };
+  //Getting Songs data
+    let returnData;
+    //by artist
+    if (searchType === 'artist') {
+      returnData = await fetch('https://api.spotify.com/v1/search?offset=0&limit=50&type=track&q=artist:' + inputText.replaceAll(' ', '+'), requestParams)
+        .then(response => response.json())
+        .then(data => setSongs(data.tracks.items));
+    //by track
+    } else if (searchType === 'track') {
+      returnData = await fetch('https://api.spotify.com/v1/search?offset=0&limit=50&type=track&q=track:' + inputText.replaceAll(' ', "+"), requestParams)
+        .then(response => response.json())
+        .then(data => setSongs(data.tracks.items));
+    }
+  }
+  console.log(songs)
 
   return (
     <>
@@ -60,10 +72,9 @@ function App() {
         handleInputText={handleInputText}
         searchType={searchType}
         handleSearchType={handleSearchType}
-        searchQuery={searchQuery}
-        handleSubmit={handleSubmit} />
-      <SearchResults
-        searchQuery={searchQuery} />
+        handleSubmit={handleSearch} />
+      <SearchResults 
+        songList={songs}/>
       <Playlist />
     </>
   )
