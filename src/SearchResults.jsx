@@ -1,18 +1,22 @@
 import {useState, useEffect} from 'react';
+import './index.css';
 
 function SearchResults({songList}) {
+
+    //const Height = songList[0].album.images[2].height.toString();
 
 
     return (
         <>
-            <p>Search Results Here</p>
-            <div>
+            <div className='resultsContainer'>
                 {songList.map((song, i) => {
                     return (
-                        <div key={i}>
-                            <img src={song.album.images[2].url} />
-                            <p>{song.name}</p>
-                            <p>{song.artists[0].name}</p>
+                        <div className='resultCard' key={i}>
+                            <img className='albumCover' src={song.album.images[2].url} />
+                            <div className='cardText'>
+                                <p className='songTitle'>{song.name}</p>
+                                <p className='artistName'>{song.artists[0].name}</p>
+                            </div>
                         </div>
                     );
                 })}

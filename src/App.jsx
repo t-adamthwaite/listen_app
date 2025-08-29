@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import './App.css'
+import './index.css'
 import Playlist from './Playlist'
 import SearchBar from './SearchBar'
 import SearchResults from './SearchResults'
@@ -50,16 +50,19 @@ function App() {
       }
     };
   //Getting Songs data
-    let returnData;
     //by artist
     if (searchType === 'artist') {
-      returnData = await fetch('https://api.spotify.com/v1/search?offset=0&limit=50&type=track&q=artist:' + inputText.replaceAll(' ', '+'), requestParams)
+      await fetch('https://api.spotify.com/v1/search?offset=0&limit=50&type=track&q=artist:' + inputText.replaceAll(' ', '+'), requestParams)
         .then(response => response.json())
         .then(data => setSongs(data.tracks.items));
     //by track
     } else if (searchType === 'track') {
-      returnData = await fetch('https://api.spotify.com/v1/search?offset=0&limit=50&type=track&q=track:' + inputText.replaceAll(' ', "+"), requestParams)
+      await fetch('https://api.spotify.com/v1/search?offset=0&limit=50&type=track&q=track:' + inputText.replaceAll(' ', "+"), requestParams)
         .then(response => response.json())
+        .then(data => setSongs(data.tracks.items));
+    } else if (searchType === 'genre') {
+      await fetch('https://api.spotify.com/v1/search?offset=0&limit=50&type=track&q=genre:' + inputText.replaceAll(' ', '+'), requestParams)
+        .then(request => request.json())
         .then(data => setSongs(data.tracks.items));
     }
   }
@@ -67,15 +70,19 @@ function App() {
 
   return (
     <>
-      <SearchBar
-        inputText={inputText}
-        handleInputText={handleInputText}
-        searchType={searchType}
-        handleSearchType={handleSearchType}
-        handleSubmit={handleSearch} />
-      <SearchResults 
-        songList={songs}/>
-      <Playlist />
+      <div className='app'>
+        <SearchBar
+          className='searchBar'
+          inputText={inputText}
+          handleInputText={handleInputText}
+          searchType={searchType}
+          handleSearchType={handleSearchType}
+          handleSubmit={handleSearch} />
+        <SearchResults 
+          songList={songs}/>
+        <Playlist 
+          className='playlist'/>
+      </div>
     </>
   )
 }

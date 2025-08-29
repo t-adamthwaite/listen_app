@@ -1,0 +1,125 @@
+
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0%);
+    }
+    10% {
+        transform: translateX(0%);
+    }
+    50% {
+        transform: translateX(-100%);
+    }
+    50.01% {
+        transform: translateX(100%);
+    }
+    90% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.app {
+    display: grid;
+    grid-template-rows: 30px 1fr;
+    grid-template-columns: 65% 35%;
+}
+
+.searchBar {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+/*for SearchResults and Playlist*/
+.resultsContainer {
+    grid-row: 2;
+    grid-column: 1;
+    width: 30em;
+    max-width: 100%;
+    height: 700px;
+    overflow-y: scroll;
+    overflow-x: visible;
+    
+}
+
+.resultCard {
+    display: grid;
+    height: 64px;
+    width: 95.5%;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 10px;
+    grid-template-columns: 69px 1fr;
+    grid-template-rows: 100%;
+    background: midnightblue;
+    color: white;
+
+}
+
+.resultCard:hover {
+    cursor: pointer;
+    border-top: 3px solid midnightblue;
+    border-bottom: 3px solid midnightblue;
+}
+
+.albumCover {
+    grid-column: 1;
+    grid-row: 1 / 2;
+    border-radius: 7.5%;
+    z-index: 1;
+}
+
+.cardText {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1 / 2;
+    grid-template-columns: 1fr;
+    grid-template-rows: 55% 45%;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: midnightblue;
+}
+
+.songTitle {
+    grid-column: 1;
+    grid-row: 1;
+    display: inline-block;
+    margin-top: 0;
+    height: 100%;
+    width:100%;
+    align-content: top;
+    font-size: 1.3em;
+    font-weight: 475;
+    background: midnightblue;
+}
+
+.songTitle:hover {
+    animation: scroll-left 7s linear infinite;
+}
+
+.artistName {
+    grid-column: 1;
+    grid-row: 2;
+    height: 90%;
+    width: 100%;
+    margin-top: 0px;
+    font-size: 1.15em;
+    font-weight: 300;
+    text-indent: 0.5em;
+    align-content: end;
+    border-top: 1px solid white;
+    background: midnightblue;
+}
+
+/*Styling for Playlist*/
+.playlist{ 
+    grid-row: 1;
+    grid-column: 2;
+    align-content: flex-start;
+    justify-content: start;
+}
