@@ -24,7 +24,7 @@
 .app {
     display: grid;
     grid-template-rows: 30px 1fr;
-    grid-template-columns: 65% 35%;
+    grid-template-columns: 50% 50%;
 }
 
 .searchBar {
@@ -122,4 +122,29 @@
     grid-column: 2;
     align-content: flex-start;
     justify-content: start;
+}
+
+.playlistContainer {
+    grid-row: 2;
+    grid-column: 2;
+    width: 30em;
+    max-width: 100%;
+    height: 700px;
+    overflow-y: scroll;
+    overflow-x: visible;
+    
+}
+
+.playlistCard {
+    display: grid;
+    height: 64px;
+    width: 95.5%;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 10px;
+    grid-template-columns: 69px 1fr;
+    grid-template-rows: 100%;
+    background: midnightblue;
+    color: white;
+
 }

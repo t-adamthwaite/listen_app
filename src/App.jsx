@@ -66,7 +66,34 @@ function App() {
         .then(data => setSongs(data.tracks.items));
     }
   }
-  console.log(songs)
+
+  //transfer songs from results to playlist
+    //Get array for song on click
+  const [currentSong, setCurrentSong] = useState(null);
+  function handleClickResults(e) {
+    const resultIndex = e.target.id;
+    setCurrentSong(songs[resultIndex]);
+  }
+  //add song to playlist
+  const [playlist, setPlaylist] = useState([]);
+  useEffect(() => {
+    setPlaylist(prev => [...prev, currentSong]);
+  }, [currentSong]);
+  //contingency for null song info
+  for (let i = 0; i < playlist.length; i++) {
+      if (playlist[i] === null) {
+        playlist.splice(i, 1);
+      }
+    };
+
+  //remove song from returned song list
+  useEffect(() => {
+    setSongs(prev => prev.filter(item => item !== currentSong));
+  }, [currentSong]);
+
+  console.log(songs);
+  console.log(currentSong);
+  console.log(playlist);
 
   return (
     <>
@@ -79,9 +106,11 @@ function App() {
           handleSearchType={handleSearchType}
           handleSubmit={handleSearch} />
         <SearchResults 
-          songList={songs}/>
+          songList={songs}
+          handleClick={handleClickResults}/>
         <Playlist 
-          className='playlist'/>
+          className='playlist'
+          playlist={playlist}/>
       </div>
     </>
   )
