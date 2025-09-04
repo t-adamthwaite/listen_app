@@ -50,15 +50,12 @@ function Playlist({currentTrack, playlist, userId, token}) {
             })
     };
 
-        await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, addSongsParams)
-            .then(response => response.json())
-            .then(data => console.log(data));
+        await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, addSongsParams);
     }
 
     async function handlePost(e) {
         e.preventDefault();
         await createPlaylist(token, userId, playlistName);
-        console.log(playlistId);
         await addPlaylistSongs(playlistId);
     }
 
