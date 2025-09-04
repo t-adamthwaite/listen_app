@@ -5,6 +5,10 @@ import SearchBar from './SearchBar'
 import SearchResults from './SearchResults'
 
 function App() {
+
+  const userId = (localStorage.getItem('user_data'))
+  const accessToken = (localStorage.getItem('access_token'));
+  
   //SearchBar states and handler functions
   const [inputText, setInputText] = useState('');
   function handleInputText(e) {
@@ -15,26 +19,6 @@ function App() {
   function handleSearchType(e) {
       setSearchType(e.target.value)
   }
- 
-
-  //Spotify API access token request
-  const [accessToken, setAccessToken] = useState('');
-  const clientID = '9a1429f9ade9438783281ab6449e78bd';
-  const clientSecret = 'eb82f51b03da4576b15ef28efbda10e8';
-  useEffect(() => {
-      const authParams =  {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: `grant_type=client_credentials&client_id=${clientID}&client_secret=${clientSecret}`
-      };
-
-      fetch('https://accounts.spotify.com/api/token', authParams)
-          .then(request => request.json())
-          .then(data => setAccessToken(data.access_token))
-  }, [])
-
 
   //state to hold our data
   const [songs, setSongs] = useState([]);
@@ -77,14 +61,9 @@ function App() {
   //add song to playlist
   const [playlist, setPlaylist] = useState([]);
   useEffect(() => {
-    setPlaylist(prev => [...prev, currentSong]);
-  }, [currentSong]);
-  //contingency for null song info
-  for (let i = 0; i < playlist.length; i++) {
-      if (playlist[i] === null) {
-        playlist.splice(i, 1);
-      }
-    };
+    if (currentSong) {
+      setPlaylist(prev => [...prev, currentSong]);
+}}, [currentSong]);
 
   //remove song from returned song list
   useEffect(() => {
@@ -94,6 +73,11 @@ function App() {
   console.log(songs);
   console.log(currentSong);
   console.log(playlist);
+
+
+  
+  
+
 
   return (
     <>
@@ -108,9 +92,12 @@ function App() {
         <SearchResults 
           songList={songs}
           handleClick={handleClickResults}/>
-        <Playlist 
+        <Playlist
+          userId={userId} 
           className='playlist'
-          playlist={playlist}/>
+          currentTrack={currentSong}
+          playlist={playlist}
+          token={accessToken}/>
       </div>
     </>
   )
