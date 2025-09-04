@@ -1,4 +1,7 @@
-
+.body {
+    background-color: rgb(3, 11, 79);
+    z-index: 0;
+}
 
 @keyframes scroll-left {
     0% {
@@ -21,20 +24,100 @@
     }
 }
 
+@keyframes submitClick {
+    0% {
+
+    }
+    10% {
+        border-radius: 50%;
+        background-color: lightgreen;
+        color: black;
+    }
+    60% {
+        transform: rotate(2.0turn);
+    }
+    90% {
+        transform: rotate(-1.0turn);
+    }
+    100% {
+        border-radius: 10px;
+        background-color: whitesmoke;
+        color: black;
+    }
+}
+
 .app {
     display: grid;
-    grid-template-rows: 30px 1fr;
+    grid-template-rows: repeat(8, 75px);
     grid-template-columns: 50% 50%;
 }
 
 .searchBar {
+    display: flex;
+    width: 30em;
+    max-width: 100%;
     grid-row: 1;
     grid-column: 1;
+    align-self: end;
+    justify-content: center;
+    height: 50px;
+    background-color:#191970CC;
+    border-radius: 10px;
+}
+
+.searchType {
+    height: 25px;
+    width: 20%;
+    align-self: center;
+    text-align: center;
+    font-weight: 550;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: none;
+    border-right: 2px solid darkgrey;
+    opacity: 85%;
+}
+
+.searchType:hover {
+    cursor: pointer;
+}
+
+.searchBox {
+    align-self: center;
+    height: 24px;
+    width: 50%;
+    font-weight: 550;
+    padding-top: 0px;
+    margin-top: 0px;
+    border: none;
+    background-color: whitesmoke;
+}
+
+.searchBox:focus {
+    outline: none;
+}
+
+.searchButton {
+    align-self: center;
+    height: 25px;
+    width: 22%;
+    text-align: left;
+    font-weight: 550;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: none;
+    border-left: 2px solid darkgray;
+    background-color: whitesmoke;
+    opacity: 90%;
+}
+
+.searchButton:hover {
+    cursor: pointer;
 }
 
 /*for SearchResults and Playlist*/
 .resultsContainer {
-    grid-row: 2;
+    grid-row: 2 / 8;
     grid-column: 1;
     width: 30em;
     max-width: 100%;
@@ -117,15 +200,15 @@
 }
 
 /*Styling for Playlist*/
-.playlist{ 
-    grid-row: 1;
+.playlist { 
+    grid-row: 1 / 8;
     grid-column: 2;
     align-content: flex-start;
     justify-content: start;
 }
 
 .playlistContainer {
-    grid-row: 2;
+    grid-row: 1 / 8;
     grid-column: 2;
     width: 30em;
     max-width: 100%;
@@ -147,4 +230,60 @@
     background: midnightblue;
     color: white;
 
+}
+
+.playlistSubmit {
+    grid-row: 8;
+    grid-column: 2;
+    display: flex;
+    width: 30em;
+    max-width: 100%;
+    grid-row: 1;
+    grid-column: 1;
+    align-self: end;
+    justify-content: center;
+    height: 50px;
+    background-color:#191970CC;
+    border-radius: 10px;
+}
+
+.playlistText {
+    align-self: center;
+    text-align: center;
+    height: 24px;
+    width: 50%;
+    font-weight: 550;
+    padding-top: 0px;
+    margin-top: 0px;
+    border: none;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background-color: whitesmoke;
+}
+
+.playlistText:focus {
+    outline: none;
+}
+
+.playlistSubmitButton {
+    align-self: center;
+    height: 25px;
+    width: 33%;
+    text-align: left;
+    font-weight: 550;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: none;
+    border-left: 2px solid darkgray;
+    background-color: whitesmoke;
+    opacity: 90%;
+}
+
+.playlistSubmitButton:hover {
+    cursor: pointer;
+}
+
+.playlistSubmitButton:active {
+    background-color: lightgreen;
+    box-shadow: white;
 }

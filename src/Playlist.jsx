@@ -10,7 +10,7 @@ function Playlist({currentTrack, playlist, userId, token}) {
         if (currentTrack) {
             setSubmissionTracks((prev) => [...prev, 'spotify:track:' + currentTrack.id])}}, [playlist]);
     
-    const [playlistName, setPlaylistName] = useState('My Playlist');
+    const [playlistName, setPlaylistName] = useState('');
     function handlePlaylistName(e) {
         e.preventDefault();
         setPlaylistName(e.target.value);
@@ -61,22 +61,34 @@ function Playlist({currentTrack, playlist, userId, token}) {
 
     return (
         <>
-            <p></p>
-            <div className='playlistContainer'>
-                {playlist.map((song, i) => {
-                    return (
-                        <div className='playlistCard' key={i} id={i}>
-                            <img className='albumCover' src={song.album.images[2].url} id={i}/>
-                            <div className='cardText' id={i}>
-                                <p className='songTitle' id={i}>{song.name}</p>
-                                <p className='artistName' id={i}>{song.artists[0].name}</p>
+            <div className='playlist'>
+                <div className='playlistContainer'>
+                    {playlist.map((song, i) => {
+                        return (
+                            <div className='playlistCard' key={i} id={i}>
+                                <img className='albumCover' src={song.album.images[2].url} id={i}/>
+                                <div className='cardText' id={i}>
+                                    <p className='songTitle' id={i}>{song.name}</p>
+                                    <p className='artistName' id={i}>{song.artists[0].name}</p>
+                                </div>
                             </div>
-                        </div>
-                    );
-                })}
-                <form id='submission-form'>
-                    <input name='name' type='text' placeholder='Enter Playlist Name' value={playlistName} onChange={handlePlaylistName} />
-                    <button type='submit' onClick={handlePost}>Post to Spotify!</button>
+                        );
+                    })}
+                </div>
+                <form className='playlistSubmit' id='submission-form'>
+                        <input 
+                            className='playlistText'
+                            name='name' 
+                            type='text' 
+                            placeholder='Enter Playlist Name' 
+                            value={playlistName} 
+                            onChange={handlePlaylistName} />
+                        <button 
+                            className='playlistSubmitButton'
+                            type='submit' 
+                            onClick={handlePost}>
+                                Post to Spotify!
+                        </button>
                 </form>
             </div>
         </>
