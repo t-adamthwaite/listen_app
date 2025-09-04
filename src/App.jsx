@@ -70,15 +70,6 @@ function App() {
     setSongs(prev => prev.filter(item => item !== currentSong));
   }, [currentSong]);
 
-  console.log(songs);
-  console.log(currentSong);
-  console.log(playlist);
-
-
-  
-  
-
-
   return (
     <>
       <div className='app'>

@@ -9,16 +9,12 @@ function Playlist({currentTrack, playlist, userId, token}) {
     useEffect(() => {
         if (currentTrack) {
             setSubmissionTracks((prev) => [...prev, 'spotify:track:' + currentTrack.id])}}, [playlist]);
-
-    console.log(submissionTracks);
-    
     
     const [playlistName, setPlaylistName] = useState('My Playlist');
     function handlePlaylistName(e) {
         e.preventDefault();
         setPlaylistName(e.target.value);
     }
-
 
     let playlistId;
     async function createPlaylist(token, userId, playlistName) {
@@ -59,20 +55,16 @@ function Playlist({currentTrack, playlist, userId, token}) {
             .then(data => console.log(data));
     }
 
-
-
     async function handlePost(e) {
         e.preventDefault();
         await createPlaylist(token, userId, playlistName);
         console.log(playlistId);
         await addPlaylistSongs(playlistId);
     }
-       
-
 
     return (
         <>
-            <p>{userId}</p>
+            <p></p>
             <div className='playlistContainer'>
                 {playlist.map((song, i) => {
                     return (
