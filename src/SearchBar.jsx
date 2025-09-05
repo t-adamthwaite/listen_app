@@ -5,6 +5,7 @@ function SearchBar( {inputText, handleInputText, searchType, handleSearchType, h
 
     return (
         <>
+            <h1 className='banner'><span className='bannerSpan'>List</span>en!</h1>
             <form className='searchBar' onSubmit={handleSubmit}>
                 {/* select object should create query string for search from list of song, artist, genre, or all*/}
                 <select
