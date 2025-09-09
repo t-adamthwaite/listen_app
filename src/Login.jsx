@@ -4,7 +4,7 @@ import App from './App'
 
 
 const clientId = '9a1429f9ade9438783281ab6449e78bd';
-const redirectUrl = 'http://127.0.0.1:3000';
+const redirectUrl = 'https://listen-spotify-app.netlify.app';
 
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
